@@ -20,6 +20,18 @@ export const posts = sqliteTable("posts", {
     .notNull(),
 });
 
+export const recipes = sqliteTable("recipes", {
+  id: integer("id").primaryKey(),
+  title: text("title").notNull(),
+  ingredients: text("ingredients"),
+  method: text("method"),
+  createdAt: text("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
+
+export type InsertRecipe = typeof recipes.$inferInsert;
+export type SelectRecipe = typeof recipes.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 export type SelectUser = typeof users.$inferSelect;
 export type InsertPost = typeof posts.$inferInsert;
