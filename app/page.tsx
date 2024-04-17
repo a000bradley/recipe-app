@@ -4,16 +4,20 @@ import React from "react";
 import getIngredients from "./lib/getIngredients";
 
 export default function Home() {
-  const [getValue, setValue] = React.useState("");
+  const [searchTerm, setsearchTerm] = React.useState("");
+  const [ingredients, setIngredients] = React.useState([]);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
+    setsearchTerm(e.target.value);
   }
 
   async function handleButtonClick() {
-    const ans = await getIngredients(getValue);
+    const response = await getIngredients(searchTerm);
 
-    console.log("Monday = ", ans);
+    const ingredientArray = response.split(", ");
+    console.log(ingredientArray);
+
+    setIngredients(ingredientArray);
   }
 
   return (
@@ -29,7 +33,17 @@ export default function Home() {
           onChange={(e) => onChange(e)}
         ></input>
         <button onClick={() => handleButtonClick()}>Search?</button>
-        <div>// Recipes go heere {getValue}</div>
+        <div>
+          {ingredients.map((ingredient) => {
+            return (
+              <div className="my-1">
+                {" "}
+                <input type="checkbox" />
+                {ingredient}
+              </div>
+            );
+          })}
+        </div>
 
         <div className="fixed bottom-0 left-0 w-full bg-gray-100 p-4 flex justify-around items-center">
           Test

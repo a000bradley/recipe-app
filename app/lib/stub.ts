@@ -8,7 +8,8 @@ export default {
       index: 0,
       message: {
         role: "assistant",
-        content: "potatoes, heavy cream, garlic, gruyere cheese, salt, pepper",
+        content:
+          "Ths is a test, heavy cream, garlic, gruyere cheese, salt, pepper",
       },
       logprobs: null,
       finish_reason: "stop",
