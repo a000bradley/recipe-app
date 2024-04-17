@@ -2,6 +2,7 @@
 
 import React from "react";
 import getIngredients from "./lib/getIngredients";
+import IngredientsList from "./components/IngredientsList/IngredientsList";
 
 export default function Home() {
   const [searchTerm, setsearchTerm] = React.useState("");
@@ -34,15 +35,7 @@ export default function Home() {
         ></input>
         <button onClick={() => handleButtonClick()}>Search?</button>
         <div>
-          {ingredients.map((ingredient) => {
-            return (
-              <div className="my-1">
-                {" "}
-                <input type="checkbox" />
-                {ingredient}
-              </div>
-            );
-          })}
+          <IngredientsList ingredients={ingredients} />
         </div>
 
         <div className="fixed bottom-0 left-0 w-full bg-gray-100 p-4 flex justify-around items-center">
