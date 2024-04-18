@@ -4,22 +4,33 @@ import React from "react";
 import getIngredients from "./lib/getIngredients";
 import IngredientsList from "./components/IngredientsList/IngredientsList";
 
+interface IngredientsState {
+  [key: string]: string[];
+}
+
+interface IngredientsState {
+  monday: string[];
+  tuesday: string[];
+  wednesday: string[];
+  thursday: string[];
+  friday: string[];
+}
+
 export default function Home() {
   const [searchTerm, setsearchTerm] = React.useState("");
-  const [ingredients, setIngredients] = React.useState({
+  const [ingredients, setIngredients] = React.useState<IngredientsState>({
     monday: [],
     tuesday: [],
     wednesday: [],
     thursday: [],
     friday: [],
   });
-  // const [ingredients, setIngredients] = React.useState([]);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setsearchTerm(e.target.value);
   }
 
-  async function handleButtonClick(dayOfWeek) {
+  async function handleButtonClick(dayOfWeek: string) {
     const response = await getIngredients(searchTerm);
 
     const ingredientArray = response.split(", ");
