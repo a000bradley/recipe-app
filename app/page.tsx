@@ -1,71 +1,66 @@
 "use client";
 
 import React from "react";
-import getIngredients from "./lib/getIngredients";
-import IngredientsList from "./components/IngredientsList/IngredientsList";
+import Meal from "./components/Meal/Meal";
+import initialMealPlan from "./utils/initialMealPlan";
 
-interface IngredientsState {
-  [key: string]: string[];
+interface Meal {
+  breakfast: string[];
+  lunch: string[];
+  dinner: string[];
 }
 
-interface IngredientsState {
-  monday: string[];
-  tuesday: string[];
-  wednesday: string[];
-  thursday: string[];
-  friday: string[];
+interface DaySchedule {
+  [day: string]: Meal;
 }
 
 export default function Home() {
-  const [searchTerm, setsearchTerm] = React.useState("");
-  const [ingredients, setIngredients] = React.useState<IngredientsState>({
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-  });
+  const [mealSchedule, setMealSchedule] =
+    React.useState<DaySchedule>(initialMealPlan);
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setsearchTerm(e.target.value);
-  }
-
-  async function handleButtonClick(dayOfWeek: string) {
-    const response = await getIngredients(searchTerm);
-
-    const ingredientArray = response.split(", ");
-
-    setIngredients((prevIngredients) => ({
-      ...prevIngredients,
-      [dayOfWeek]: ingredientArray,
+  async function updateIngredients(
+    dayOfWeek: string,
+    mealType: string,
+    newIngredients: String[]
+  ) {
+    setMealSchedule((prevSchedule) => ({
+      ...prevSchedule,
+      [dayOfWeek]: {
+        ...prevSchedule[dayOfWeek],
+        [mealType]: newIngredients,
+      },
     }));
-
-    console.log(ingredients);
   }
+  console.log(mealSchedule);
 
   return (
-    <main>
+    <main className="pb-20">
       <div className="container mx-auto">
-        <h1>Next Weeks ingredietns</h1>
+        <h1 className="text-6xl">Meal Plan</h1>
 
-        {Object.keys(ingredients).map((day) => (
-          <div key={day}>
-            <h2 className="text-5xl">{day}</h2>
-            <input
-              className="border-2"
-              placeholder="What are we having?"
-              name={day}
-              onChange={(e) => onChange(e)}
-            ></input>
-            <button onClick={() => handleButtonClick(day)}>Search?</button>
-            {/* ... your input */}
-            <IngredientsList ingredients={ingredients[day]} />
+        {Object.keys(mealSchedule).map((day) => (
+          <div className="my-10" key={day}>
+            <h2 className="text-4xl">{day}</h2>
+            <Meal
+              dayOfWeek={day}
+              mealType="breakfast"
+              ingredients={mealSchedule[day].breakfast}
+              onUpdateIngredients={updateIngredients}
+            />
+            <Meal
+              dayOfWeek={day}
+              mealType="lunch"
+              ingredients={mealSchedule[day].lunch}
+              onUpdateIngredients={updateIngredients}
+            />
+            <Meal
+              dayOfWeek={day}
+              mealType="dinner"
+              ingredients={mealSchedule[day].dinner}
+              onUpdateIngredients={updateIngredients}
+            />
           </div>
         ))}
-
-        <div className="fixed bottom-0 left-0 w-full bg-gray-100 p-4 flex justify-around items-center">
-          Test
-        </div>
       </div>
     </main>
   );

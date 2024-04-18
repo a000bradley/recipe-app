@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="container mx-auto my-5">Header</nav>
+        <nav className="container mx-auto my-5">Shopping List</nav>
         {children}
       </body>
     </html>
