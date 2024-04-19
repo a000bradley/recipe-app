@@ -1,4 +1,4 @@
-import { Ingredient } from "@/app/types/Ingredient";
+import { Ingredient } from "@/app/types";
 
 interface IngredientsListProps {
   ingredients: Ingredient[];
@@ -12,8 +12,9 @@ function IngredientsList({
   return (
     <ul className="ingredients-list">
       {ingredients.map((ingredient, index) => {
+        // Meal Name
         if (index === 0) {
-          return <h3>{ingredient.name}</h3>;
+          return <h3 key={index}>{ingredient.name}</h3>;
         }
         return (
           <li key={index}>

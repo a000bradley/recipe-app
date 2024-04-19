@@ -2,7 +2,7 @@
 
 import { ObjectId } from "mongodb";
 import clientPromise from "@/db/db";
-import { DaySchedule } from "../Home";
+import { DaySchedule } from "@/app/types";
 
 async function getDBConnection() {
   const client = await clientPromise;

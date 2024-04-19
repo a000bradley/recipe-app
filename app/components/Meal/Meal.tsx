@@ -1,12 +1,13 @@
 import React from "react";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import getIngredients from "@/app/lib/getIngredients";
-import { Ingredient } from "@/app/types/Ingredient";
+import { Ingredient } from "@/app/types";
 
 interface MealProps {
   dayOfWeek: string;
   mealType: "breakfast" | "lunch" | "dinner";
   ingredients: Ingredient[];
+  editView: Boolean;
   onUpdateIngredients: (
     dayOfWeek: string,
     mealType: string,
@@ -18,6 +19,7 @@ function Meal({
   dayOfWeek,
   mealType,
   ingredients,
+  editView,
   onUpdateIngredients,
 }: MealProps) {
   const [searchTerm, setsearchTerm] = React.useState("");
@@ -48,6 +50,9 @@ function Meal({
     onUpdateIngredients(dayOfWeek, mealType, []);
   }
 
+  if (!editView && ingredients.length === 0) {
+    return;
+  }
   return (
     <div>
       <h2 className="text-2xl">{mealType} </h2>
@@ -55,32 +60,37 @@ function Meal({
         ingredients={ingredients}
         onIngredientChecked={handleIngredientChecked}
       />
-      <input
-        className="border-2"
-        placeholder="Meals Name"
-        value={searchTerm}
-        onChange={(e) => setsearchTerm(e.target.value)}
-      />
-      <button
-        onClick={findIngredients}
-        className="rounded-full p-2 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring focus:ring-blue-300"
-      >
-        <svg
-          className="w-5 h-5"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+
+      {editView && (
+        <>
+          <input
+            className="border-2"
+            placeholder="Meals Name"
+            value={searchTerm}
+            onChange={(e) => setsearchTerm(e.target.value)}
           />
-        </svg>
-      </button>
-      <button onClick={handleClear}>Clear</button>
+          <button
+            onClick={findIngredients}
+            className="rounded-full p-2 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring focus:ring-blue-300"
+          >
+            <svg
+              className="w-5 h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+          <button onClick={handleClear}>Clear</button>
+        </>
+      )}
     </div>
   );
 }
