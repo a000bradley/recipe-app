@@ -26,7 +26,7 @@ export default async function getIngredients(mealName: string) {
     presence_penalty: 0,
   });
 
-  if (response.choices[0].message.content) {
+  if (!response.choices[0].message.content) {
     return "error";
   }
 
