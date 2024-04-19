@@ -14,6 +14,11 @@ interface DaySchedule {
   [day: string]: Meal;
 }
 
+export interface Ingredient {
+  name: string;
+  checked: boolean;
+}
+
 export default function Home() {
   const [mealSchedule, setMealSchedule] =
     React.useState<DaySchedule>(initialMealPlan);
