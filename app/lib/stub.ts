@@ -9,7 +9,7 @@ export default {
       message: {
         role: "assistant",
         content:
-          "Ths is a test, heavy cream, garlic, gruyere cheese, salt, pepper",
+          "Meal Name, Ingredient 1, Ingredient 2, Ingredient 3, Ingredient 4, Ingredient 5, Ingredient 6",
       },
       logprobs: null,
       finish_reason: "stop",
