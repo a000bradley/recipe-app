@@ -1,5 +1,5 @@
-import { getMealSchedule } from "./lib/mealSchedule";
 import Home from "./Home";
+import { getMealSchedule } from "./lib/mealSchedule";
 import initialMealPlan from "./utils/initialMealPlan";
 
 export default async function Page() {

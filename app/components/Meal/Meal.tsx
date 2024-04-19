@@ -51,6 +51,10 @@ function Meal({
   return (
     <div>
       <h2 className="text-2xl">{mealType} </h2>
+      <IngredientsList
+        ingredients={ingredients}
+        onIngredientChecked={handleIngredientChecked}
+      />
       <input
         className="border-2"
         placeholder="Meals Name"
@@ -77,10 +81,6 @@ function Meal({
         </svg>
       </button>
       <button onClick={handleClear}>Clear</button>
-      <IngredientsList
-        ingredients={ingredients}
-        onIngredientChecked={handleIngredientChecked}
-      />
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default async function getIngredients(mealName: string) {
   //     {
   //       role: "system",
   //       content:
-  //         "Given a meal name you will reply with the ingredients as a comma separated list only with the amounts needed to make a meal for 2 people, For a UK audience. Never return anything but a comma seperated list.",
+  //         "Given a meal name you will reply with the ingredients as a comma separated list only with the amounts needed to make a meal for 2 people, For a UK audience. Never return anything but a comma seperated list. Return the meal name as the first entry",
   //     },
   //     {
   //       role: "user",
