@@ -11,11 +11,15 @@ interface Meal {
   dinner: Ingredient[];
 }
 
-interface DaySchedule {
+export interface DaySchedule {
   [day: string]: Meal;
 }
 
-export default function Home({ initialMealSchedule }) {
+interface HomeProps {
+  initialMealSchedule: DaySchedule;
+}
+
+export default function Home({ initialMealSchedule }: HomeProps) {
   const [mealSchedule, setMealSchedule] =
     React.useState<DaySchedule>(initialMealSchedule);
 

@@ -2,6 +2,7 @@
 
 import { ObjectId } from "mongodb";
 import clientPromise from "@/db/db";
+import { DaySchedule } from "../Home";
 
 async function getDBConnection() {
   const client = await clientPromise;
@@ -14,14 +15,16 @@ async function getDBConnection() {
   };
 }
 
-export async function getMealSchedule() {
+export async function getMealSchedule(): Promise<DaySchedule | null> {
   const { db, documentId } = await getDBConnection();
   const data = await db.collection("MealSchedule").findOne({ _id: documentId });
+  if (!data) return null;
+
   const { _id, ...mealSchedule } = data;
   return mealSchedule;
 }
 
-export async function saveMealSchedule(mealSchedule) {
+export async function saveMealSchedule(mealSchedule: DaySchedule) {
   const { db, documentId } = await getDBConnection();
   const data = await db
     .collection("MealSchedule")
