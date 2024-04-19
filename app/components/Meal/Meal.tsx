@@ -30,7 +30,7 @@ function Meal({
       alert("Enter a Meal Name");
       return;
     }
-    const response = await getIngredients(searchTerm);
+    const response = (await getIngredients(searchTerm)) || "";
     const ingredientArray = response.split(", ").map((ingredient) => {
       return {
         name: ingredient,

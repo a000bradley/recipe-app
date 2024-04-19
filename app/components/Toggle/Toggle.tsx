@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const Toggle = ({ label, onChange }) => {
+interface ToggleProps {
+  label: string;
+  onChange: (newValue: boolean) => void;
+}
+
+const Toggle = ({ label, onChange }: ToggleProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleToggleChange = () => {

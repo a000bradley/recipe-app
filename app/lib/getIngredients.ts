@@ -26,6 +26,10 @@ export default async function getIngredients(mealName: string) {
     presence_penalty: 0,
   });
 
+  if (response.choices[0].message.content) {
+    return "error";
+  }
+
   // const response = stub;
 
   return response.choices[0].message.content;
