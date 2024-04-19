@@ -26,6 +26,10 @@ function Meal({
   const [searchTerm, setsearchTerm] = React.useState("");
 
   async function findIngredients() {
+    if (!searchTerm) {
+      alert("Enter a Meal Name");
+      return;
+    }
     const response = await getIngredients(searchTerm);
     const ingredientArray = response.split(", ").map((ingredient) => {
       return {
@@ -55,9 +59,9 @@ function Meal({
     return;
   }
   return (
-    <div className="flex mb-4">
+    <div className="md:flex mb-4">
       <h2 className="text-2xl meal-title font-bold">{mealType} </h2>
-      <div className="pl-2">
+      <div className="md:pl-2">
         <IngredientsList
           ingredients={ingredients}
           onIngredientChecked={handleIngredientChecked}
