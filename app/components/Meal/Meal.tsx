@@ -1,7 +1,7 @@
 import React from "react";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import getIngredients from "@/app/lib/getIngredients";
-import { Ingredient } from "@/app/page";
+import { Ingredient } from "@/app/types/Ingredient";
 
 interface MealProps {
   dayOfWeek: string;

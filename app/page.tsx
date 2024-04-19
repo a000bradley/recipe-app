@@ -2,21 +2,17 @@
 
 import React from "react";
 import Meal from "./components/Meal/Meal";
+import { Ingredient } from "./types/Ingredient";
 import initialMealPlan from "./utils/initialMealPlan";
 
 interface Meal {
-  breakfast: string[];
-  lunch: string[];
-  dinner: string[];
+  breakfast: Ingredient[];
+  lunch: Ingredient[];
+  dinner: Ingredient[];
 }
 
 interface DaySchedule {
   [day: string]: Meal;
-}
-
-export interface Ingredient {
-  name: string;
-  checked: boolean;
 }
 
 export default function Home() {
@@ -26,7 +22,7 @@ export default function Home() {
   async function updateIngredients(
     dayOfWeek: string,
     mealType: string,
-    newIngredients: String[]
+    newIngredients: Ingredient[]
   ) {
     setMealSchedule((prevSchedule) => ({
       ...prevSchedule,
@@ -36,7 +32,6 @@ export default function Home() {
       },
     }));
   }
-  console.log(mealSchedule);
 
   return (
     <main className="pb-20">

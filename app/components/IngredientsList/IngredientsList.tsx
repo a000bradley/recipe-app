@@ -1,4 +1,4 @@
-import { Ingredient } from "../../page";
+import { Ingredient } from "@/app/types/Ingredient";
 
 interface IngredientsListProps {
   ingredients: Ingredient[];
