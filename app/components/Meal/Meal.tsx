@@ -43,12 +43,18 @@ function Meal({
     onUpdateIngredients(dayOfWeek, mealType, newIngredientsArray);
   }
 
+  function handleClear() {
+    setsearchTerm("");
+    onUpdateIngredients(dayOfWeek, mealType, []);
+  }
+
   return (
     <div>
       <h2 className="text-2xl">{mealType} </h2>
       <input
         className="border-2"
         placeholder="Meals Name"
+        value={searchTerm}
         onChange={(e) => setsearchTerm(e.target.value)}
       />
       <button
@@ -70,6 +76,7 @@ function Meal({
           />
         </svg>
       </button>
+      <button onClick={handleClear}>Clear</button>
       <IngredientsList
         ingredients={ingredients}
         onIngredientChecked={handleIngredientChecked}
