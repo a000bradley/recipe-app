@@ -2,6 +2,7 @@ import React from "react";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import getIngredients from "@/app/lib/getIngredients";
 import { Ingredient } from "@/app/types";
+import "./Meal.css";
 
 interface MealProps {
   dayOfWeek: string;
@@ -54,43 +55,42 @@ function Meal({
     return;
   }
   return (
-    <div>
-      <h2 className="text-2xl">{mealType} </h2>
-      <IngredientsList
-        ingredients={ingredients}
-        onIngredientChecked={handleIngredientChecked}
-      />
+    <div className="flex mb-4">
+      <h2 className="text-2xl meal-title font-bold">{mealType} </h2>
+      <div className="pl-2">
+        <IngredientsList
+          ingredients={ingredients}
+          onIngredientChecked={handleIngredientChecked}
+        />
 
-      {editView && (
-        <>
-          <input
-            className="border-2"
-            placeholder="Meals Name"
-            value={searchTerm}
-            onChange={(e) => setsearchTerm(e.target.value)}
-          />
-          <button
-            onClick={findIngredients}
-            className="rounded-full p-2 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring focus:ring-blue-300"
-          >
-            <svg
-              className="w-5 h-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </button>
-          <button onClick={handleClear}>Clear</button>
-        </>
-      )}
+        {editView && (
+          <>
+            {!ingredients.length ? (
+              <>
+                <input
+                  placeholder="Search Meal Name"
+                  value={searchTerm}
+                  className="align-super border-b-2"
+                  onChange={(e) => setsearchTerm(e.target.value)}
+                />
+                <button
+                  onClick={findIngredients}
+                  className="bg-slate-100 px-2 rounded-full ml-4"
+                >
+                  Search
+                </button>
+              </>
+            ) : (
+              <button
+                className="bg-slate-100 px-2 rounded-full mt-2"
+                onClick={handleClear}
+              >
+                Clear
+              </button>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

@@ -14,7 +14,11 @@ function IngredientsList({
       {ingredients.map((ingredient, index) => {
         // Meal Name
         if (index === 0) {
-          return <h3 key={index}>{ingredient.name}</h3>;
+          return (
+            <h3 className="text-2xl pb-2" key={index}>
+              {ingredient.name}
+            </h3>
+          );
         }
         return (
           <li key={index}>

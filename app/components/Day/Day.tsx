@@ -29,8 +29,8 @@ const Day = ({
   }
 
   return (
-    <div className="my-10" key={day}>
-      <h2 className="text-4xl">{day}</h2>
+    <div className="my-10 border-b-2 pb-5" key={day}>
+      <h2 className="text-4xl font-bold pb-4">{day}</h2>
       <Meal
         dayOfWeek={day}
         mealType="breakfast"

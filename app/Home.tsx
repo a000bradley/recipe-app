@@ -17,7 +17,7 @@ export default function Home({ initialMealSchedule }: HomeProps) {
   const [editView, setEditView] = React.useState(true);
   React.useEffect(() => {
     // Persist Change
-    saveMealSchedule(mealSchedule);
+    // saveMealSchedule(mealSchedule);
   }, [mealSchedule]);
 
   async function updateIngredients(
@@ -39,9 +39,9 @@ export default function Home({ initialMealSchedule }: HomeProps) {
   }
 
   return (
-    <main className="pb-20">
+    <main className="py-20">
       <div className="container mx-auto px-5">
-        <h1 className="text-6xl mb-5">Shopping List</h1>
+        <h1 className="text-6xl mb-5 font-bold">Shopping List</h1>
 
         <div>
           <Toggle
