@@ -36,7 +36,7 @@ function Meal({
   function handleIngredientChecked(checkedIngredient: Ingredient) {
     const newIngredientsArray = ingredients.map((ingredient) => {
       if (ingredient.name === checkedIngredient.name) {
-        return { name: ingredient.name, checked: true };
+        return { name: ingredient.name, checked: !ingredient.checked };
       }
       return ingredient;
     });

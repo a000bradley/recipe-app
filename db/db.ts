@@ -1,10 +1,16 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client";
+import { MongoClient } from "mongodb";
 
-const client = createClient({
-  url: process.env.TURSO_CONNECTION_URL!,
-  authToken: process.env.TURSO_AUTH_TOKEN!,
-});
+const uri: string = process.env.MONGODB_URI || "";
+const options = {};
 
-export const db = drizzle(client);
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
+
+if (!process.env.MONGODB_URI) {
+  throw new Error("Missing Mong DB Connection String");
+}
+
+client = new MongoClient(uri, options);
+clientPromise = client.connect();
+
+export default clientPromise;
